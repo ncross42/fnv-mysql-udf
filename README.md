@@ -1,3 +1,16 @@
+Compile with (adapt the include and lib path to your environment):
+```
+> gcc -Wall -O2 -I/usr/local/include/apr-1
+> -I/usr/local/include/mysql \
+  lib_mysqludf_stomp.c  /usr/local/lib/libapr-1.so -shared \
+  -o lib_mysqludf_stomp.so
+> strip ./lib_mysqludf_stomp.so
+```
+Add the functions to MySQL with:
+```
+mysql> CREATE FUNCTION stompsend RETURNS STRING SONAME "lib_mysqludf_stomp.so";
+```
+
 fnv-mysql-udf
 =============
 
